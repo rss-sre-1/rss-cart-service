@@ -2,9 +2,9 @@ package com.revature.cart.controller;
 
 import java.util.List;
 
-import org.jboss.logging.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -65,7 +65,7 @@ public class CartController {
 	@GetMapping("/carts/{id}")
 	@ApiOperation(value = "Get Carts by User Id", notes = "Retrieves a list of Carts with the matching User ID", response = Cart.class)
 	public List<Cart> getCartsByUserId(@ApiParam(value = "User ID", required = true) @PathVariable("id") int userId) {
-		MDC.put(event, "getCartsByUserId");
+		MDC.put("event", "getCartsByUserId");
 		log.info("get cart by user by id {}", userId);
 		MDC.clear();
 		return csc.getCartsByUserId(userId);
