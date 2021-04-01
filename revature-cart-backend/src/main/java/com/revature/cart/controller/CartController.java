@@ -2,6 +2,9 @@ package com.revature.cart.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +25,8 @@ import io.swagger.annotations.ApiParam;
 @CrossOrigin
 public class CartController {
 	
+	private static final Logger log = LoggerFactory.getLogger(CartController.class);
+	
 	/**
 	 * Link to the service container service layer
 	 */
@@ -36,6 +41,8 @@ public class CartController {
 		this.csc = csc;
 	}
 	
+	String event = "event";
+	
 	/**
 	 * Saves the cart object to the database
 	 * @param cart the cart object to be saved
@@ -44,6 +51,9 @@ public class CartController {
 	@PostMapping("/cart")
 	@ApiOperation(value = "Create Cart", notes = "Saves the Cart object to the database", response = Cart.class)
 	public Cart createCart(@ApiParam(value = "Cart object", required = true) @RequestBody Cart cart) {
+		MDC.put(event, "createCart");
+		log.info("create cart by id {}", cart.getCartId());
+		MDC.clear();
 		return csc.createCart(cart);
 	}
 	
@@ -55,6 +65,9 @@ public class CartController {
 	@GetMapping("/carts/{id}")
 	@ApiOperation(value = "Get Carts by User Id", notes = "Retrieves a list of Carts with the matching User ID", response = Cart.class)
 	public List<Cart> getCartsByUserId(@ApiParam(value = "User ID", required = true) @PathVariable("id") int userId) {
+		MDC.put("event", "getCartsByUserId");
+		log.info("get cart by user by id {}", userId);
+		MDC.clear();
 		return csc.getCartsByUserId(userId);
 	}
 	
@@ -66,6 +79,9 @@ public class CartController {
 	@GetMapping("/cart/{id}")
 	@ApiOperation(value = "Get Cart by Cart Id", notes = "Retrieves an individual Cart by Cart ID", response = Cart.class)
 	public Cart getCartById(@ApiParam(value = "Cart ID", required = true) @PathVariable("id") int id) {
+		MDC.put(event, "getCartById");
+		log.info("get cart by id {}", id);
+		MDC.clear();
 		return csc.getCartById(id);
 	}
 	
@@ -77,6 +93,9 @@ public class CartController {
 	@PutMapping("/cart")
 	@ApiOperation(value = "Update Cart", notes = "Updates an already existing Cart based on Cart ID", response = Cart.class)
 	public Cart updateCart(@ApiParam(value = "Cart object", required = true) @RequestBody Cart cart) {
+		MDC.put(event, "updateCart");
+		log.info("update cart by id {}", cart.getCartId());
+		MDC.clear();
 		return csc.updateCart(cart);
 	}
 	
@@ -87,6 +106,8 @@ public class CartController {
 	@DeleteMapping("/cart/{id}")
 	@ApiOperation(value = "Delete Cart", notes = "Deletes a Cart from the database based on Cart ID")
 	public void deleteCartById(@ApiParam(value = "Cart ID", required = true) @PathVariable("id") int id) {
+		MDC.put(event, "deleteCartById");
+		log.info("delete cart by id {}", id);
 		csc.deleteCartById(id);
 	}
 }
