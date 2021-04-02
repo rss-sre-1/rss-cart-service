@@ -5,7 +5,7 @@ metadata:
   namespace: rss-cart
 spec:
   selector:
-    app: rss-cart-service
+    app: rss-cart
   ports:
     - name: http
       protocol: TCP
