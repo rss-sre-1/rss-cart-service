@@ -5,18 +5,28 @@
 ## DOCKERFILE must reside in project root, i.e. rss-evaluation-service/Evaluation/Dockerfile
 ### Employ the builder pattern
 FROM maven:3.6.1-jdk-8 as builder
+
+WORKDIR /app
+
 ### Provide Default Argument
 COPY pom.xml pom.xml
 COPY src/ src/
 
-RUN mvn clean package
+RUN mvn clean package -Dmaven.test.skip=true
 
-## Use only a JRE to run application
-FROM gcr.io/distroless/java:8
+FROM ubuntu:20.10 as extractor
+WORKDIR /pinpoint-agent
+ADD https://github.com/pinpoint-apm/pinpoint/releases/download/v2.2.2/pinpoint-agent-2.2.2.tar.gz pinpoint-agent-2.2.2.tar.gz
+RUN tar -xzf pinpoint-agent-2.2.2.tar.gz
+
+FROM java:8 as runner
+WORKDIR /app
+COPY --from=extractor /pinpoint-agent/pinpoint-agent-2.2.2/ /pinpoint-agent
+COPY pinpoint.config /pinpoint-agent/pinpoint.config
 
 ## Copy Artifact from maven image
-COPY --from=builder target/rss-cart-0.0.1-SNAPSHOT.jar rss-cart-service.jar 
+COPY --from=builder /app/target/rss-cart-0.0.1-SNAPSHOT.jar rss-cart-service.jar 
 
 EXPOSE 9999
 
-ENTRYPOINT ["java", "-jar", "rss-cart-service.jar"]
+ENTRYPOINT ["java", "-javaagent:/pinpoint-agent/pinpoint-bootstrap-2.2.2.jar", "-Dpinpoint.config=/pinpoint-agent/pinpoint.config", "-Dpinpoint.container=rss-cart", "-Dpinpoint.agentId=rss-cart", "-Dpinpoint.applicationName=rss-cart-service", "-jar", "rss-cart-service.jar"]
