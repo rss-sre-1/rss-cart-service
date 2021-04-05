@@ -29,4 +29,4 @@ COPY --from=builder /app/target/rss-cart-0.0.1-SNAPSHOT.jar rss-cart-service.jar
 
 EXPOSE 9999
 
-ENTRYPOINT ["java", "-javaagent:/pinpoint-agent/pinpoint-bootstrap-2.2.2.jar", "-Dpinpoint.config=/pinpoint-agent/pinpoint.config", "-Dpinpoint.container=rss-cart", "-Dpinpoint.agentId=rss-cart", "-Dpinpoint.applicationName=rss-cart-service", "-jar", "rss-cart-service.jar"]
+ENTRYPOINT ["java", "-javaagent:/pinpoint-agent/pinpoint-bootstrap-2.2.2.jar", "-Dpinpoint.config=/pinpoint-agent/pinpoint.config", "-Dpinpoint.container=rss-cart", "-Dpinpoint.agentId=rss-cart", "-Dpinpoint.applicationName=rss", "-jar", "rss-cart-service.jar"]
