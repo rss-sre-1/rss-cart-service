@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: rss-cart-service
   namespace: rss-cart
+  labels:
+    app: rss-cart
 spec:
   selector:
     app: rss-cart
