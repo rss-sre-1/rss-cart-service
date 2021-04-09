@@ -32,7 +32,7 @@ public class CartItemServiceContainer implements CartItemService {
 
 	@Override
 	public void deleteCartItemById(int id) {
-		cid.deleteById(id);
+		cid.deleteById(id).orElseThrow(() -> new ItemNotFoundException());
 	}
 
 	@Override

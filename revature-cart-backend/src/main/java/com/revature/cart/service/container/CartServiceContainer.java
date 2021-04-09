@@ -42,6 +42,6 @@ public class CartServiceContainer implements CartService {
 
 	@Override
 	public void deleteCartById(int id) {
-		cdao.deleteById(id);
+		cdao.deleteById(id).orElseThrow(() -> new CartNotFoundException());
 	}
 }
