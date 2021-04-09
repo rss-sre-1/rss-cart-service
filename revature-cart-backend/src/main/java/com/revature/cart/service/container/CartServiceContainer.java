@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.revature.cart.dao.CartDao;
 import com.revature.cart.model.Cart;
 import com.revature.cart.service.CartService;
+import com.revature.exceptions.CartNotFoundException;
 
 @Service
 public class CartServiceContainer implements CartService {
@@ -31,7 +32,7 @@ public class CartServiceContainer implements CartService {
 
 	@Override
 	public Cart getCartById(int id) {
-		return cdao.findById(id).get();
+		return cdao.findById(id).orElseThrow(() -> new CartNotFoundException() );
 	}
 	
 	@Override
