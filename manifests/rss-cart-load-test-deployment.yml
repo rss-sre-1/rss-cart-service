@@ -5,6 +5,7 @@ metadata:
   namespace: rss-cart
   labels:
     app: rss-cart
+    label: loading
 spec:
   replicas: 0
   minReadySeconds: 20

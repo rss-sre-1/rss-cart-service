@@ -22,6 +22,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		String bodyOfResponse = "Item does not exist";
 		return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
-	
-
 }

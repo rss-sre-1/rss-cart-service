@@ -4,7 +4,8 @@ metadata:
   name: rss-cart-deployment-canry
   namespace: rss-cart
   labels:
-    app: rss-cart    
+    app: rss-cart
+    track: canary    
 spec:
   replicas: 0
   minReadySeconds: 20
