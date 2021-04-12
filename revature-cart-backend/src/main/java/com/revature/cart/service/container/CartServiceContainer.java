@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.revature.cart.dao.CartDao;
 import com.revature.cart.model.Cart;
 import com.revature.cart.service.CartService;
+import com.revature.exceptions.CartNotFoundException;
+import com.revature.exceptions.ItemNotFoundException;
 
 @Service
 public class CartServiceContainer implements CartService {
@@ -21,7 +23,12 @@ public class CartServiceContainer implements CartService {
 	
 	@Override
 	public Cart createCart(Cart cart) {
-		return cdao.save(cart);
+		if (cart.getName() == null) {
+			throw new CartNotFoundException();
+		}
+		else {
+			return cdao.save(cart);
+		}		
 	}
 	
 	@Override
@@ -31,7 +38,12 @@ public class CartServiceContainer implements CartService {
 
 	@Override
 	public Cart getCartById(int id) {
-		return cdao.findById(id).get();
+		if (cdao.findById(id) == null) {
+			throw new CartNotFoundException();
+		}
+		else {
+			return cdao.findById(id).get();
+		}
 	}
 	
 	@Override
@@ -41,6 +53,11 @@ public class CartServiceContainer implements CartService {
 
 	@Override
 	public void deleteCartById(int id) {
-		cdao.deleteById(id);
+		if (cdao.findById(id) == null) {
+			throw new CartNotFoundException();
+		}
+		else {
+			cdao.deleteById(id);
+		}
 	}
 }

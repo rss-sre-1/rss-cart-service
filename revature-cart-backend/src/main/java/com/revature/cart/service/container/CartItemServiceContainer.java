@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.revature.cart.dao.CartItemDao;
 import com.revature.cart.model.CartItem;
 import com.revature.cart.service.CartItemService;
+import com.revature.exceptions.ItemNotFoundException;
 
 @Service
 public class CartItemServiceContainer implements CartItemService {
@@ -21,7 +22,12 @@ public class CartItemServiceContainer implements CartItemService {
 
 	@Override
 	public CartItem getCartItemById(int id) {
-		return cid.findById(id).get();
+		if (cid.findById(id) == null) {
+			throw new ItemNotFoundException();
+		}
+		else {
+			return cid.findById(id).get();
+		}
 	}
 
 	@Override
@@ -31,7 +37,13 @@ public class CartItemServiceContainer implements CartItemService {
 
 	@Override
 	public void deleteCartItemById(int id) {
-		cid.deleteById(id);
+		if (cid.findById(id) == null) {
+			throw new ItemNotFoundException();
+		}
+		else {
+			cid.deleteById(id);
+		}
+		
 	}
 
 	@Override

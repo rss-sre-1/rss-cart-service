@@ -5,6 +5,7 @@ metadata:
   namespace: rss-cart
   labels:
     app: rss-cart
+    track: stable
 spec:
   replicas: 3
   minReadySeconds: 20
