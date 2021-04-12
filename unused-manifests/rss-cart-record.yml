@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cart-service-recording-rules
+  namespace: rss-cart
+  labels:
+    #app: rss-cart
+    job: rss-cart-service
+    release: kube-prometheus-stack
+    app: kube-prometheus-stack
+    team: sre
+spec:
+  groups:
+  - name: rss-cart-recording-rules
+    rules:
+    - expr: |
+        sum(rate(http_server_requests_seconds_sum{job="rss-cart-service",uri!~"/actuator.*",uri!~"/*.."}[1m])) by (method, uri) 
+        / 
+        sum(rate(http_server_requests_seconds_count{job="rss-cart-service",uri!~"/actuator.*",uri!~"/*.."}[1m])) by (method, uri)
+      labels:
+        app: rss-cart
+        job: rss-cart-service
+      record: rsscart:http_request_latency_seconds:rate1m 
+      
