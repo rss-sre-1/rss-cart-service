@@ -23,12 +23,12 @@ public class CartServiceContainer implements CartService {
 	
 	@Override
 	public Cart createCart(Cart cart) {
-		if (cart.getName() == null) {
-			throw new CartNotFoundException();
-		}
-		else {
+		
+		try {
 			return cdao.save(cart);
-		}		
+		}catch(Exception e) {
+			throw new CartNotFoundException();
+		}	
 	}
 	
 	@Override
@@ -38,11 +38,11 @@ public class CartServiceContainer implements CartService {
 
 	@Override
 	public Cart getCartById(int id) {
-		if (cdao.findById(id) == null) {
-			throw new CartNotFoundException();
-		}
-		else {
+		
+		try {
 			return cdao.findById(id).get();
+		}catch (Exception e) {
+			throw new CartNotFoundException();
 		}
 	}
 	
@@ -53,11 +53,10 @@ public class CartServiceContainer implements CartService {
 
 	@Override
 	public void deleteCartById(int id) {
-		if (cdao.findById(id) == null) {
-			throw new CartNotFoundException();
-		}
-		else {
+		try {
 			cdao.deleteById(id);
+		}catch (Exception e) {
+			throw new CartNotFoundException();
 		}
 	}
 }

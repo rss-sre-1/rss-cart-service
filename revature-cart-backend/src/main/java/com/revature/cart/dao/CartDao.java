@@ -14,7 +14,7 @@ public interface CartDao extends JpaRepository<Cart, Integer> {
 	
 	// add optionals for exception handling
 	
-	public Optional<Cart> findById(int id);
-	public Optional<Cart> deleteById(int id);
+//	public Optional<Cart> findById(int id);
+//	public Optional<Cart> deleteById(int id);
 	
 }

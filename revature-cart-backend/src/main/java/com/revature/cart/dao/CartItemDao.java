@@ -15,6 +15,6 @@ public interface CartItemDao extends JpaRepository<CartItem, Integer> {
 	
 	// change provided crud operations to optional for exception handling
 	
-	public Optional<CartItem> findById(int id);
-	public Optional<CartItem> deleteById(int id);
+//	public Optional<CartItem> findById(int id);
+//	public Optional<CartItem> deleteById(int id);
 }

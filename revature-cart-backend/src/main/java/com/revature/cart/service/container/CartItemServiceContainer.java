@@ -21,12 +21,11 @@ public class CartItemServiceContainer implements CartItemService {
 	}
 
 	@Override
-	public CartItem getCartItemById(int id) {
-		if (cid.findById(id) == null) {
-			throw new ItemNotFoundException();
-		}
-		else {
+	public CartItem getCartItemById(int id) {		
+		try {
 			return cid.findById(id).get();
+		} catch(Exception e) {
+			throw new ItemNotFoundException();			
 		}
 	}
 
@@ -36,14 +35,12 @@ public class CartItemServiceContainer implements CartItemService {
 	}
 
 	@Override
-	public void deleteCartItemById(int id) {
-		if (cid.findById(id) == null) {
-			throw new ItemNotFoundException();
-		}
-		else {
+	public void deleteCartItemById(int id) {		
+		try {
 			cid.deleteById(id);
-		}
-		
+		} catch(Exception e) {
+			throw new ItemNotFoundException();
+		}		
 	}
 
 	@Override
