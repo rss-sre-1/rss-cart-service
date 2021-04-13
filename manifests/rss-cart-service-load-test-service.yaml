@@ -11,7 +11,7 @@ metadata:
     prometheus.io/scrape: "true"
 spec:
   selector:
-    app: rss-cart-service-load-test
+    label: loading
   ports:
   - name: http
     protocol: TCP
