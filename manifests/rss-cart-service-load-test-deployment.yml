@@ -11,12 +11,12 @@ spec:
   minReadySeconds: 20
   selector:
     matchLabels:
-      app: rss-cart
+      app: rss-cart-load-test
       track: load-test
   template:
     metadata:
       labels:
-        app: rss-cart
+        app: rss-cart-load-test
         track: load-test
     spec:
       volumes:
