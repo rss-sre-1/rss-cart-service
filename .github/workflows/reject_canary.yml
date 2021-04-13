@@ -8,10 +8,11 @@ env:
   IMAGE_TAG: ${{ github.sha }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  PROJECT_ROOT: Account-Service
-  JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }} # new for handoffOne branch
-  NAMESPACE: rss-account
-  CONTAINER: rss-account-service
+  PROJECT_ROOT: revature-cart-backend
+  JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+  JENKINS_USER: cart_user
+  NAMESPACE: rss-cart
+  CONTAINER: rss-cart-service
 jobs:
   access_aws:
     name: access AWS
