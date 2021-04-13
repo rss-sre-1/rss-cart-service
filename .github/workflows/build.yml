@@ -60,6 +60,7 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.EKS_SECRET_ACCESS_KEY }} --profile p3
           aws configure set default.region ${{ secrets.AWS_REGION }} --profile p3
           aws eks --region us-east-1 update-kubeconfig --profile p3 --name ${{ secrets.EKS_CLUSTER_NAME }}
+          cd manifests
           kubectl --namespace $NAMESPACE set image deployment/$NAMESPACE-service-load-test-deployment $CONTAINER=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           kubectl --namespace $NAMESPACE scale --replicas=3 deployment/$NAMESPACE-service-load-test-deployment
   handoff_to_jenkins:
