@@ -1,0 +1,209 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 4,
+    "links": [],
+    "panels": [
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 98
+                },
+                {
+                  "color": "yellow",
+                  "value": 99
+                },
+                {
+                  "color": "green",
+                  "value": 99.5
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "expr": "( sum (http_server_requests_seconds_count{job=\"rss-account-service\", url!~\"/actuator/.*\", status!~\"5..\"}) by (job) )\n/ \n( sum (http_server_requests_seconds_count{job=\"rss-account-service\", url!~\"/actuator/.*\"}) by (job) )\n* 100",
+            "interval": "",
+            "legendFormat": "Account",
+            "refId": "A"
+          },
+          {
+            "expr": "( sum (http_server_requests_seconds_count{job=\"rss-cart-service\", url!~\"/actuator/.*\", status!~\"5..\"}) by (job) )\n/ \n( sum (http_server_requests_seconds_count{job=\"rss-cart-service\", url!~\"/actuator/.*\"}) by (job) )\n* 100",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Cart",
+            "refId": "B"
+          },
+          {
+            "expr": "( sum (http_server_requests_seconds_count{job=\"rss-evaluation-service\", url!~\"/actuator/.*\", status!~\"5..\"}) by (job) )\n/ \n( sum (http_server_requests_seconds_count{job=\"rss-evaluation-service\", url!~\"/actuator/.*\"}) by (job) )\n* 100",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Evaluation",
+            "refId": "C"
+          },
+          {
+            "expr": "( sum (http_server_requests_seconds_count{job=\"rss-inventory-service\", url!~\"/actuator/.*\", status!~\"5..\"}) by (job) )\n/ \n( sum (http_server_requests_seconds_count{job=\"rss-inventory-service\", url!~\"/actuator/.*\"}) by (job) )\n* 100",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Inventory",
+            "refId": "D"
+          }
+        ],
+        "title": "Rate of Successful Requests",
+        "type": "gauge"
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 75
+                },
+                {
+                  "color": "orange",
+                  "value": 90
+                },
+                {
+                  "color": "red",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "expr": "avg(system_cpu_usage{job=\"rss-account-service\"})",
+            "interval": "",
+            "legendFormat": "Account",
+            "refId": "A"
+          },
+          {
+            "expr": "avg(system_cpu_usage{job=\"rss-cart-service\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Cart",
+            "refId": "B"
+          },
+          {
+            "expr": "avg(system_cpu_usage{job=\"rss-evaluation-service\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Evaluation",
+            "refId": "C"
+          },
+          {
+            "expr": "avg(system_cpu_usage{job=\"rss-inventory-service\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Inventory",
+            "refId": "D"
+          }
+        ],
+        "title": "System CPU Usage",
+        "type": "gauge"
+      }
+    ],
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "RSS Monitor",
+    "uid": "OGs3ZvuMz",
+    "version": 4
+  }

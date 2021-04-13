@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1618264199566,
+  "id": 1,
+  "iteration": 1618346622213,
   "links": [],
   "panels": [
     {
@@ -35,7 +35,7 @@
     },
     {
       "datasource": null,
-      "description": "for job = rss-cart-service",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -98,7 +98,7 @@
           "refId": "A"
         },
         {
-          "expr": "sum(http_server_requests_seconds_count{job=\"$job\", url!~\"/actuator/.*\", status!~\"5..\"})\n/\nsum(http_server_requests_seconds_count{job=\"$job\", url!~\"/actuator/.*\"})\n* 100",
+          "expr": "sum(http_server_requests_seconds_count{job=~\"$namespace.*\", url!~\"/actuator/.*\", status!~\"5..\"})\n/\nsum(http_server_requests_seconds_count{job=~\"$namespace.*\", url!~\"/actuator/.*\"})\n* 100",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -118,7 +118,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "description": "for rss-cart-service",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {},
@@ -178,6 +178,13 @@
           "interval": "",
           "legendFormat": "actual",
           "refId": "B"
+        },
+        {
+          "expr": "sum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", uri!=\"/actuator.*\", status!~\"5..\"}[1d]))\n/\nsum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", uri!=\"/actuator.*\"}[1d]))\n*100",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "actual",
+          "refId": "C"
         }
       ],
       "thresholds": [],
@@ -1069,7 +1076,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "description": "for Cart Service [1 min] to monitor load balancing between 3 pods",
+      "description": "Monitor load balancing between 3 pods [3min]",
       "fieldConfig": {
         "defaults": {
           "color": {},
@@ -1290,7 +1297,7 @@
     },
     {
       "datasource": null,
-      "description": "Current average CPU Usage of 3 pods for job=rss-cart-service ",
+      "description": "Current average CPU Usage of 3 pods for this service",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1786,7 +1793,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 5
+            "y": 47
           },
           "id": 27,
           "options": {
@@ -1852,7 +1859,7 @@
             "h": 8,
             "w": 6,
             "x": 18,
-            "y": 5
+            "y": 47
           },
           "id": 25,
           "options": {
@@ -1890,37 +1897,6 @@
   "tags": [],
   "templating": {
     "list": [
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "rss-cart-service",
-          "value": "rss-cart-service"
-        },
-        "datasource": null,
-        "definition": "label_values(system_cpu_usage,job)",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Job:",
-        "multi": false,
-        "name": "job",
-        "options": [],
-        "query": {
-          "query": "label_values(system_cpu_usage,job)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
       {
         "allValue": null,
         "current": {
@@ -2001,7 +1977,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "RSS Monitor",
+  "title": "Microservice Monitor",
   "uid": "QjOaT4XGk",
-  "version": 25
+  "version": 13
 }
