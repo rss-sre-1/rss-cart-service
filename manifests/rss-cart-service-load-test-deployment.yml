@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rss-cart-deployment-load-test
+  name: rss-cart-service-load-test-deployment
   namespace: rss-cart
   labels:
     app: rss-cart
