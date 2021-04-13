@@ -1,5 +1,5 @@
 {
-  "basePath": "/cart",
+  "basePath": "/",
   "definitions": {
     "Cart": {
       "properties": {
@@ -211,7 +211,7 @@
       "type": "object"
     }
   },
-  "host": "ad8d6edfec9aa4a79be8f07ba490356a-1499412652.us-east-1.elb.amazonaws.com",
+  "host": "rss-cart-service-load-test.rss-cart.svc.cluster.local:9999",
   "info": {
     "title": "OpenAPI definition",
     "version": "v0"
