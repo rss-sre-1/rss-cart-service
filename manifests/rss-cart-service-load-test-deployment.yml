@@ -4,7 +4,7 @@ metadata:
   name: rss-cart-service-load-test-deployment
   namespace: rss-cart
   labels:
-    app: rss-cart
+    app: rss-cart-load-test
     label: loading
 spec:
   replicas: 0
