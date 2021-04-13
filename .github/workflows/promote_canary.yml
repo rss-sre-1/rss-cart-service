@@ -6,12 +6,13 @@ env:
   ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
   ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_PREFIX }}-${{ secrets.APP_NAME }}
   IMAGE_TAG: ${{ github.sha }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  PROJECT_ROOT: Account-Service
+  PROJECT_ROOT: revature-cart-backend
   JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-  NAMESPACE: rss-account
-  CONTAINER: rss-account-service
+  JENKINS_USER: cart_user
+  NAMESPACE: rss-cart
+  CONTAINER: rss-cart-service
 jobs:
   access_aws:
     runs-on: ubuntu-latest
