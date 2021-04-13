@@ -12,7 +12,7 @@ env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   PROJECT_ROOT: revature-cart-backend
   JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-  JENKINS_USER: cart_user
+  JENKINS_USER: cart_service
   NAMESPACE: rss-cart
   CONTAINER: rss-cart
 jobs:
