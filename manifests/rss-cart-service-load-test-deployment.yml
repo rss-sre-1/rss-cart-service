@@ -56,18 +56,9 @@ spec:
           failureThreshold: 5
         env:
         - name: DB_URL
-          valueFrom: 
-            secretKeyRef:
-              name: rss-cart-credentials
-              key: url
+          value: jdbc:postgresql://cart-data-postgresql.loadtesting.svc.cluster.local:5432/postgresdb
         - name: DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: rss-cart-credentials
-              key: username
+          value: postgres
         - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: rss-cart-credentials
-              key: password
+          value: eClLOYF96I
       
