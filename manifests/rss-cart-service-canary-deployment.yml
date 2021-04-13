@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rss-cart-deployment-canry
+  name: rss-cart-deployment-canary
   namespace: rss-cart
   labels:
     app: rss-cart
@@ -40,20 +40,6 @@ spec:
         image: 855430746673.dkr.ecr.us-east-1.amazonaws.com/matt-oberlies-sre-p3-rss-cart:latest
         ports:
         - containerPort: 9999
-        livenessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 9999
-          initialDelaySeconds: 20
-          periodSeconds: 20
-          failureThreshold: 5
-        startupProbe:
-          httpGet:
-            path: /actuator/health
-            port: 9999
-          initialDelaySeconds: 15
-          periodSeconds: 3
-          failureThreshold: 5
         env:
         - name: DB_URL
           valueFrom: 

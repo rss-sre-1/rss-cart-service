@@ -4,19 +4,19 @@ metadata:
   name: rss-cart-deployment-load-test
   namespace: rss-cart
   labels:
-    app: rss-cart
+    app: rss-cart-load-test
     label: loading
 spec:
   replicas: 0
   minReadySeconds: 20
   selector:
     matchLabels:
-      app: rss-cart
+      app: rss-cart-load-test
       track: load-test
   template:
     metadata:
       labels:
-        app: rss-cart
+        app: rss-cart-load-test
         track: load-test
     spec:
       volumes:
@@ -40,34 +40,11 @@ spec:
         image: 855430746673.dkr.ecr.us-east-1.amazonaws.com/matt-oberlies-sre-p3-rss-cart:latest
         ports:
         - containerPort: 9999
-        livenessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 9999
-          initialDelaySeconds: 20
-          periodSeconds: 20
-          failureThreshold: 5
-        startupProbe:
-          httpGet:
-            path: /actuator/health
-            port: 9999
-          initialDelaySeconds: 15
-          periodSeconds: 3
-          failureThreshold: 5
         env:
         - name: DB_URL
-          valueFrom: 
-            secretKeyRef:
-              name: rss-cart-credentials
-              key: url
+          value: jdbc:postgresql://cart-data-postgresql.loadtesting.svc.cluster.local:5432/postgresdb
         - name: DB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: rss-cart-credentials
-              key: username
+          value: postgres
         - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: rss-cart-credentials
-              key: password
+          value: eClLOYF96I
       
