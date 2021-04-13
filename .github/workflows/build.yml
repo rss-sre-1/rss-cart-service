@@ -2,7 +2,7 @@ name: BUILD
 on:
   push:
     branches:
-      - master
+      - dev
 env:
   ECR_REPOSITORY_PREFIX: ${{ secrets.ECR_REPOSITORY_PREFIX }}
   ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
