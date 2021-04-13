@@ -242,7 +242,7 @@
             "schema": {
               "$ref": "#/definitions/Cart"
             }
-          },
+          }
         },
         "tags": [
           "cart-controller"
