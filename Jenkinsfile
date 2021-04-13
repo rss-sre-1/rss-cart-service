@@ -39,7 +39,7 @@ pipeline {
         stage('Load Test') {
             steps {
                 sh "ls"
-                sh "curl -F file=@account-swagger.json -F 'LoadTestConfig={\"testPlanName\": \"ServiceNameService\", \"loops\": 1, \"threads\": 244, \"rampUp\": 1, \"followRedirects\" : false}' ${CONTEXT_PATH}${DOCUTEST} -o ${DOCUTEST_RESPONSE}"
+                sh "curl -F file=@cart-swagger.json -F 'LoadTestConfig={\"testPlanName\": \"ServiceNameService\", \"loops\": 1, \"threads\": 244, \"rampUp\": 1, \"followRedirects\" : false}' ${CONTEXT_PATH}${DOCUTEST} -o ${DOCUTEST_RESPONSE}"
                 
                 script{
                     def response = readJSON file: "${DOCUTEST_RESPONSE}"
@@ -64,7 +64,7 @@ pipeline {
         stage('Create Canary') {
             steps {
                 // Send http request to trigger create_canary GitHub workflow in repository
-                sh 'curl -X POST -H \"Accept: application/vnd.github.v3+json\" -H \"Authorization: Bearer $GITHUB_ACCESS_TOKEN \" https://api.github.com/repos/rss-sre-1/rss-account-service/actions/workflows/create_canary.yml/dispatches -d \'{\"ref\":\"master\"}\''
+                sh 'curl -X POST -H \"Accept: application/vnd.github.v3+json\" -H \"Authorization: Bearer $GITHUB_ACCESS_TOKEN \" https://api.github.com/repos/rss-sre-1/rss-cart-service/actions/workflows/create_canary.yml/dispatches -d \'{\"ref\":\"master\"}\''
             }
         }
 
@@ -73,9 +73,9 @@ pipeline {
                script {
                    try{
                        input 'Promote Canary to Production?'
-                       sh 'curl -X POST -H \"Accept: application/vnd.github.v3+json\" -H \"Authorization: Bearer $GITHUB_ACCESS_TOKEN \" https://api.github.com/repos/rss-sre-1/rss-account-service/actions/workflows/promote_canary.yml/dispatches -d \'{\"ref\":\"master\"}\''
+                       sh 'curl -X POST -H \"Accept: application/vnd.github.v3+json\" -H \"Authorization: Bearer $GITHUB_ACCESS_TOKEN \" https://api.github.com/repos/rss-sre-1/rss-cart-service/actions/workflows/promote_canary.yml/dispatches -d \'{\"ref\":\"master\"}\''
                    } catch (error) {
-                       sh 'curl -X POST -H \"Accept: application/vnd.github.v3+json\" -H \"Authorization: Bearer $GITHUB_ACCESS_TOKEN \" https://api.github.com/repos/rss-sre-1/rss-account-service/actions/workflows/reject_canary.yml/dispatches -d \'{\"ref\":\"master\"}\''
+                       sh 'curl -X POST -H \"Accept: application/vnd.github.v3+json\" -H \"Authorization: Bearer $GITHUB_ACCESS_TOKEN \" https://api.github.com/repos/rss-sre-1/rss-cart-service/actions/workflows/reject_canary.yml/dispatches -d \'{\"ref\":\"master\"}\''
                    }
                }
            }
