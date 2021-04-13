@@ -211,7 +211,7 @@
       "type": "object"
     }
   },
-  "host": "rss-cart-service-load-test.rss-cart.svc.cluster.local:9999",
+  "host": "rss-cart-load-test-service.rss-cart.svc.cluster.local:9999",
   "info": {
     "title": "OpenAPI definition",
     "version": "v0"
