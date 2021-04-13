@@ -8,10 +8,11 @@ env:
   IMAGE_TAG: ${{ github.sha }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  PROJECT_ROOT: Account-Service
+  PROJECT_ROOT: Cart-Service
   JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-  NAMESPACE: rss-account
-  CONTAINER: rss-account-service
+  JENKINS_USER: revature-cart-backend
+  NAMESPACE: rss-cart
+  CONTAINER: rss-cart-service
 jobs:
   access_aws:
     name: access AWS
