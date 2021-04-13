@@ -4,7 +4,7 @@ metadata:
   name: rss-cart-service-load-test
   namespace: rss-cart
   labels:
-    app: rss-cart-service-load-test
+    app: rss-cart-load-test
   annotations:
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "9999"
