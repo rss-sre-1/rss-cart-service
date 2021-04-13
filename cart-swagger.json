@@ -1,0 +1,508 @@
+{
+  "basePath": "/cart",
+  "definitions": {
+    "Cart": {
+      "properties": {
+        "cartId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cartItems": {
+          "items": {
+            "$ref": "#/definitions/CartItem"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "DummyCart": {
+      "properties": {
+        "cartId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cartItems": {
+          "items": {
+            "type": "object"
+          },
+          "minItems" : 0,
+          "maxItems" : 0,
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "CartItem": {
+      "properties": {
+        "cart": {
+          "items": {
+            "$ref": "#/definitions/DummyCart"
+          },
+          "type": "array"
+        },
+        "cartItemId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "productId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SecurityConfiguration": {
+      "properties": {
+        "additionalQueryStringParams": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "apiKey": {
+          "type": "string",
+          "x-deprecated": true
+        },
+        "apiKeyName": {
+          "type": "string",
+          "x-deprecated": true
+        },
+        "apiKeyVehicle": {
+          "type": "string",
+          "x-deprecated": true
+        },
+        "appName": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecret": {
+          "type": "string"
+        },
+        "realm": {
+          "type": "string"
+        },
+        "scopeSeparator": {
+          "type": "string"
+        },
+        "useBasicAuthenticationWithAccessCodeGrant": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "SwaggerResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-deprecated": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "swaggerVersion": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UiConfiguration": {
+      "properties": {
+        "apisSorter": {
+          "type": "string",
+          "x-deprecated": true
+        },
+        "deepLinking": {
+          "type": "boolean"
+        },
+        "defaultModelExpandDepth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "defaultModelRendering": {
+          "enum": [
+            "example",
+            "model"
+          ],
+          "type": "string"
+        },
+        "defaultModelsExpandDepth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "displayOperationId": {
+          "type": "boolean"
+        },
+        "displayRequestDuration": {
+          "type": "boolean"
+        },
+        "docExpansion": {
+          "enum": [
+            "none",
+            "list",
+            "full"
+          ],
+          "type": "string"
+        },
+        "filter": {
+          "type": "object"
+        },
+        "jsonEditor": {
+          "type": "boolean",
+          "x-deprecated": true
+        },
+        "maxDisplayedTags": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "operationsSorter": {
+          "enum": [
+            "alpha",
+            "method"
+          ],
+          "type": "string"
+        },
+        "showExtensions": {
+          "type": "boolean"
+        },
+        "showRequestHeaders": {
+          "type": "boolean",
+          "x-deprecated": true
+        },
+        "supportedSubmitMethods": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tagsSorter": {
+          "enum": [
+            "alpha"
+          ],
+          "type": "string"
+        },
+        "validatorUrl": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "ad8d6edfec9aa4a79be8f07ba490356a-1499412652.us-east-1.elb.amazonaws.com",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "paths": {
+    "/cart": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createCart",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cart"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cart"
+            }
+          },
+        },
+        "tags": [
+          "cart-controller"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updateCart",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cart"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cart"
+            }
+          }
+        },
+        "tags": [
+          "cart-controller"
+        ]
+      }
+    },
+    "/cart/{id}": {
+      "delete": {
+        "operationId": "deleteCartById",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "cart-controller"
+        ]
+      },
+      "get": {
+        "operationId": "getCartById",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cart"
+            }
+          }
+        },
+        "tags": [
+          "cart-controller"
+        ]
+      }
+    },
+    "/cartitem": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createCartItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CartItem"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CartItem"
+            }
+          }
+        },
+        "tags": [
+          "cart-item-controller"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updateCartItem",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CartItem"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CartItem"
+            }
+          }
+        },
+        "tags": [
+          "cart-item-controller"
+        ]
+      }
+    },
+    "/cartitem/{id}": {
+      "delete": {
+        "operationId": "deleteCartItemById",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "cart-item-controller"
+        ]
+      },
+      "get": {
+        "operationId": "getCartItemById",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CartItem"
+            }
+          }
+        },
+        "tags": [
+          "cart-item-controller"
+        ]
+      }
+    },
+    "/cartitems/{id}": {
+      "get": {
+        "operationId": "getAllCartItems",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/CartItem"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "tags": [
+          "cart-item-controller"
+        ]
+      }
+    },
+    "/carts/{id}": {
+      "get": {
+        "operationId": "getCartsByUserId",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Cart"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "tags": [
+          "cart-controller"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "x-components": {}
+}
