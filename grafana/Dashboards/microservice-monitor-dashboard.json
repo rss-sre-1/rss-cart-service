@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1618346622213,
+  "iteration": 1618411161179,
   "links": [],
   "panels": [
     {
@@ -173,15 +173,15 @@
           "refId": "A"
         },
         {
-          "expr": "( ( sum by(job) (rate(http_server_requests_seconds_sum{job=~\"$namespace.*\", uri!=\"/actuator.*\", status!~\"5..\"}[1d])) \n/ \nsum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", uri!=\"/actuator.*\", status!~\"5..\"}[1d])) ) < 1.2)\n/\n( ( sum by(job) (rate(http_server_requests_seconds_sum{job=~\"$namespace.*\", uri!=\"/actuator.*\"}[1d])) \n/ \nsum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", uri!=\"/actuator.*\"}[1d])) ) >= 0 )\n*100",
-          "hide": false,
+          "expr": "( ( sum by(job) (rate(http_server_requests_seconds_sum{job=~\"$namespace.*\", job!~\".*load-test.*\", uri!=\"/actuator.*\", status!~\"5..\"}[1d])) \n/ \nsum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", job!~\".*load-test.*\", uri!=\"/actuator.*\", status!~\"5..\"}[1d])) ) < 1.2)\n/\n( ( sum by(job) (rate(http_server_requests_seconds_sum{job=~\"$namespace.*\", job!~\".*load-test.*\", uri!=\"/actuator.*\"}[1d])) \n/ \nsum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", job!~\".*load-test.*\", uri!=\"/actuator.*\"}[1d])) ) >= 0 )\n*100",
+          "hide": true,
           "interval": "",
           "legendFormat": "actual",
           "refId": "B"
         },
         {
-          "expr": "sum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", uri!=\"/actuator.*\", status!~\"5..\"}[1d]))\n/\nsum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", uri!=\"/actuator.*\"}[1d]))\n*100",
-          "hide": true,
+          "expr": "sum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", job!~\".*load-test.*\", uri!=\"/actuator.*\", status!~\"5..\"}[1d]))\n/\nsum by (job) (rate(http_server_requests_seconds_count{job=~\"$namespace.*\", job!~\".*load-test.*\", uri!=\"/actuator.*\"}[1d]))\n*100",
+          "hide": false,
           "interval": "",
           "legendFormat": "actual",
           "refId": "C"
@@ -895,7 +895,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1038,7 +1038,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1047,7 +1047,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         }
       ],
@@ -1127,7 +1127,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_server_requests_seconds_count{job=~\"$namespace.*\"}[1m])) by (instance,pod)",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=~\"$namespace.*\", pod!~\".*load-test.*\", pod!~\".*canary.*\"}[1m])) by (instance,pod)",
+          "instant": false,
           "interval": "",
           "legendFormat": "{{instance}}, {{pod}}",
           "refId": "A"
@@ -1412,7 +1413,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "system_cpu_usage{job=~\"$namespace.*\"}*100",
+          "expr": "system_cpu_usage{job=~\"$namespace.*\", pod!~\".*load-test.*\", pod!~\".*canary.*\"}*100",
           "instant": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -1512,7 +1513,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{namespace=\"$namespace\", container=~\"$namespace.*\"}) by (pod)",
+          "expr": "sum(container_memory_working_set_bytes{namespace=\"$namespace\", container=~\"$namespace.*\", pod!~\".*load-test.*\", pod!~\".*canary.*\"}) by (pod)",
+          "instant": false,
           "interval": "",
           "legendFormat": "{{pod}}",
           "refId": "A"
@@ -1598,7 +1600,7 @@
             "h": 7,
             "w": 11,
             "x": 0,
-            "y": 46
+            "y": 4
           },
           "id": 4,
           "options": {
@@ -1661,7 +1663,7 @@
             "h": 7,
             "w": 4,
             "x": 11,
-            "y": 46
+            "y": 4
           },
           "id": 8,
           "options": {
@@ -1728,7 +1730,7 @@
             "h": 7,
             "w": 9,
             "x": 15,
-            "y": 46
+            "y": 4
           },
           "id": 31,
           "options": {
@@ -1793,7 +1795,7 @@
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 47
+            "y": 5
           },
           "id": 27,
           "options": {
@@ -1859,7 +1861,7 @@
             "h": 8,
             "w": 6,
             "x": 18,
-            "y": 47
+            "y": 5
           },
           "id": 25,
           "options": {
@@ -1900,7 +1902,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "rss-cart",
           "value": "rss-cart"
         },
@@ -1944,14 +1946,14 @@
         "name": "microservice",
         "options": [
           {
-            "selected": true,
-            "text": "RSScart",
-            "value": "RSScart"
-          },
-          {
             "selected": false,
             "text": "RSSaccount",
             "value": "RSSaccount"
+          },
+          {
+            "selected": true,
+            "text": "RSScart",
+            "value": "RSScart"
           },
           {
             "selected": false,
@@ -1964,7 +1966,7 @@
             "value": "RSSevaluation"
           }
         ],
-        "query": "RSScart, RSSaccount,\nRSSinventory,\nRSSevaluation",
+        "query": "RSSaccount, RSScart,\nRSSinventory,\nRSSevaluation",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -1972,12 +1974,12 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Microservice Monitor",
   "uid": "QjOaT4XGk",
-  "version": 13
+  "version": 22
 }
